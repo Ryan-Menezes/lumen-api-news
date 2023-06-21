@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\V1;
 
 use Exception;
+use App\Http\Controllers\Controller;
 use App\Services\NoticeService;
 use Illuminate\Http\Client\Request;
 use Illuminate\Http\JsonResponse;

@@ -16,3 +16,31 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->group(['prefix' => 'api/v1', 'namespace' => 'V1'], function () use ($router) {
+    $router->group(['prefix' => '/authors'], function () use ($router) {
+        $router->get('/', [
+            'uses' => 'AuthorController@findAll',
+        ]);
+
+        $router->get('/{id}', [
+            'uses' => 'AuthorController@findOne',
+        ]);
+
+        $router->post('/', [
+            'uses' => 'AuthorController@create',
+        ]);
+
+        $router->put('/{id}', [
+            'uses' => 'AuthorController@update',
+        ]);
+
+        $router->patch('/{id}', [
+            'uses' => 'AuthorController@update',
+        ]);
+
+        $router->delete('/{id}', [
+            'uses' => 'AuthorController@delete',
+        ]);
+    });
+});
