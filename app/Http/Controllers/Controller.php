@@ -49,7 +49,7 @@ abstract class Controller extends BaseController implements ControllerInterface
     {
         try {
             $result = $this->service->findOne($id);
-            $response = $this->successResponse($result, Response::HTTP_CREATED);
+            $response = $this->successResponse($result);
         } catch (Exception $e) {
             $response = $this->errorResponse($e);
         }
