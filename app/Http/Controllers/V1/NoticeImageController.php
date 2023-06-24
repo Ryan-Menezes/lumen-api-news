@@ -11,9 +11,7 @@ use Illuminate\Http\JsonResponse;
 
 class NoticeImageController extends Controller
 {
-    protected NoticeImageService $service;
-
-    protected function __construct(NoticeImageService $service)
+    public function __construct(NoticeImageService $service)
     {
         parent::__construct($service);
     }

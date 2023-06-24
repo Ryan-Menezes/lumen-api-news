@@ -14,7 +14,7 @@ class AuthorController extends Controller
         'last_name',
     ];
 
-    protected function __construct(AuthorService $service)
+    public function __construct(AuthorService $service)
     {
         parent::__construct($service);
     }

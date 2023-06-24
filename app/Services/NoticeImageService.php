@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Repositories\Eloquent\NoticeImageRepository;
+use App\Repositories\NoticeImageRepositoryInterface;
 
 class NoticeImageService extends BaseService
 {
-    protected NoticeImageRepository $repository;
-
-    public function __construct(NoticeImageRepository $repository)
+    public function __construct(NoticeImageRepositoryInterface $repository)
     {
         parent::__construct($repository);
     }

@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Repositories\Eloquent\NoticeRepository;
+use App\Repositories\NoticeRepositoryInterface;
 
 class NoticeService extends BaseService
 {
-    protected NoticeRepository $repository;
-
-    public function __construct(NoticeRepository $repository)
+    public function __construct(NoticeRepositoryInterface $repository)
     {
         parent::__construct($repository);
     }

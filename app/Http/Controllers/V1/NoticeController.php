@@ -13,8 +13,6 @@ use Illuminate\Http\Response;
 
 class NoticeController extends Controller
 {
-    protected NoticeService $service;
-
     protected array $searchFields = [
         'title',
         'subtitle',
@@ -22,7 +20,7 @@ class NoticeController extends Controller
         'description',
     ];
 
-    protected function __construct(NoticeService $service)
+    public function __construct(NoticeService $service)
     {
         parent::__construct($service);
     }
