@@ -80,7 +80,6 @@ abstract class BaseRepository implements RepositoryInterface
     {
         return (bool) $this->model
             ->where($param, $value)
-            ->firstOrFail()
             ->delete();
     }
 

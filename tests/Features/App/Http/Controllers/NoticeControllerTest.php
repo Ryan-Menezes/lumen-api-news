@@ -168,7 +168,7 @@ class NoticeControllerTest extends TestCase
         ]);
     }
 
-    public function testShouldDeleteANoticeByAuthorId()
+    public function testShouldDeleteNoticesByAuthorId()
     {
         $author_id = 1;
         Notice::factory(5)->create([

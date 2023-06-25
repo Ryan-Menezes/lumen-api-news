@@ -24,7 +24,7 @@ class AuthorControllerTest extends TestCase
         $this->seeJsonStructure(['status_code', 'data']);
     }
 
-    public function testShouldRetrieveAAuthorById()
+    public function testShouldRetrieveAnAuthorById()
     {
         $model = Author::factory()->create();
 
@@ -44,7 +44,7 @@ class AuthorControllerTest extends TestCase
         $this->assertResponseStatus(Response::HTTP_BAD_REQUEST);
     }
 
-    public function testShouldCreateAAuthor()
+    public function testShouldCreateAnAuthor()
     {
         $model = Author::factory()->make()->toArray();
 
@@ -67,7 +67,7 @@ class AuthorControllerTest extends TestCase
         $this->assertResponseStatus(Response::HTTP_BAD_REQUEST);
     }
 
-    public function testShouldUpdateAAuthorById()
+    public function testShouldUpdateAnAuthorById()
     {
         $model = Author::factory()->create(['first_name' => 'Alex']);
         $data = [
@@ -82,7 +82,7 @@ class AuthorControllerTest extends TestCase
         $this->seeInDatabase('authors', $data);
     }
 
-    public function testShouldDeleteAAuthorById()
+    public function testShouldDeleteAnAuthorById()
     {
         $model = Author::factory()->create();
 
