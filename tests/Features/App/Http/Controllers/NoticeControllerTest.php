@@ -28,7 +28,24 @@ class NoticeControllerTest extends TestCase
         $this->get($this->uri);
 
         $this->assertResponseStatus(Response::HTTP_PARTIAL_CONTENT);
-        $this->seeJsonStructure(['status_code', 'data']);
+        $this->seeJsonStructure([
+            'status_code',
+            'data' => [
+                'current_page',
+                'data',
+                'first_page_url',
+                'from',
+                'last_page',
+                'last_page_url',
+                'links',
+                'next_page_url',
+                'path',
+                'per_page',
+                'prev_page_url',
+                'to',
+                'total',
+            ],
+        ]);
     }
 
     public function testShouldRetrieveANoticeById()
