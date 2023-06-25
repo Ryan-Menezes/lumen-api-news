@@ -32,6 +32,10 @@ class Notice extends Model
         'description' => 'required|min:100',
     ];
 
+    protected $casts = [
+        'published_at' => 'datetime',
+    ];
+
     public function author(): BelongsTo
     {
         return $this->belongsTo(Author::class);

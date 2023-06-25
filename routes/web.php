@@ -73,6 +73,14 @@ $router->group(['prefix' => 'api/v1', 'namespace' => 'V1'], function () use ($ro
             'uses' => 'NoticeController@update',
         ]);
 
+        $router->put('/slug/{slug}', [
+            'uses' => 'NoticeController@updateBySlug',
+        ]);
+
+        $router->patch('/slug/{slug}', [
+            'uses' => 'NoticeController@updateBySlug',
+        ]);
+
         $router->delete('/{id}', [
             'uses' => 'NoticeController@delete',
         ]);

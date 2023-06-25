@@ -23,6 +23,11 @@ class NoticeService extends BaseService
         return $this->repository->findByAuthor($authorId, $limit, $orderBy);
     }
 
+    public function updateBySlug(string $slug, array $data): bool
+    {
+        return $this->repository->updateBySlug($slug, $data);
+    }
+
     public function deleteBySlug(string $slug): bool
     {
         return $this->repository->deleteBySlug($slug);

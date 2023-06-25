@@ -2,6 +2,7 @@
 
 namespace Tests\Features\App\Http\Controllers;
 
+use DateTime;
 use App\Models\Author;
 use Illuminate\Http\Response;
 use Laravel\Lumen\Testing\DatabaseMigrations;
@@ -36,6 +37,13 @@ class AuthorControllerTest extends TestCase
         ]);
     }
 
+    public function testShouldReturnAnErrorIfTheAuthorIdDoesNotExist()
+    {
+        $this->get("{$this->uri}/0");
+
+        $this->assertResponseStatus(Response::HTTP_BAD_REQUEST);
+    }
+
     public function testShouldCreateAAuthor()
     {
         $model = Author::factory()->make()->toArray();
@@ -62,12 +70,12 @@ class AuthorControllerTest extends TestCase
     public function testShouldUpdateAAuthorById()
     {
         $model = Author::factory()->create(['first_name' => 'Alex']);
-        $data = ['first_name' => 'John'];
-
-        $this->put("{$this->uri}/{$model->id}", [
+        $data = [
             ...$model->toArray(),
-            ...$data,
-        ]);
+            'first_name' => 'John',
+        ];
+
+        $this->put("{$this->uri}/{$model->id}", $data);
 
         $this->assertResponseOk();
         $this->seeJsonContains(['updated' => true]);
@@ -84,7 +92,7 @@ class AuthorControllerTest extends TestCase
         $this->seeJsonContains(['deleted' => true]);
         $this->seeInDatabase('authors', [
             'id' => $model->id,
-            'deleted_at' => date('Y-m-d H:i:s'),
+            'deleted_at' => new DateTime('now'),
         ]);
     }
 }

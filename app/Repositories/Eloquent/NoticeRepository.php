@@ -40,6 +40,14 @@ class NoticeRepository extends BaseRepository implements NoticeRepositoryInterfa
             ->toArray();
     }
 
+    public function updateBySlug(string $slug, array $data): bool
+    {
+        return (bool) $this->model
+            ->where('slug', $slug)
+            ->firstOrFail()
+            ->update($data);
+    }
+
     public function deleteBySlug(string $slug): bool
     {
         return $this->deleteBy('slug', $slug);
