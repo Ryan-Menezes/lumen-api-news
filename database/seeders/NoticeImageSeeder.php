@@ -13,6 +13,6 @@ class NoticeImageSeeder extends Seeder
      */
     public function run(): void
     {
-        NoticeImage::factory(100)->create();
+        NoticeImage::factory(10)->create();
     }
 }

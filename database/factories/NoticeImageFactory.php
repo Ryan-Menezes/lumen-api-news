@@ -22,7 +22,7 @@ class NoticeImageFactory extends Factory
     public function definition()
     {
         return [
-            'notice_id' => rand(1, 100),
+            'notice_id' => rand(1, 10),
             'source' => $this->faker->imageUrl(),
             'description' => $this->faker->sentence(),
             'active' => $this->faker->boolean(),

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\OrderByHelper;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -24,6 +25,7 @@ abstract class Controller extends BaseController implements ControllerInterface
         try {
             $limit = (int) $request->get('limit', 10);
             $orderBy = $request->get('order_by', []);
+            $orderBy = is_string($orderBy) ? OrderByHelper::treat($orderBy) : $orderBy;
             $searchString = $request->get('q', '');
 
             if (!empty($searchString)) {

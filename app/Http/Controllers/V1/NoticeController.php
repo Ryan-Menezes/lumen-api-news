@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\V1;
 
+use App\Helpers\OrderByHelper;
 use Exception;
 use App\Http\Controllers\Controller;
 use App\Services\NoticeService;
@@ -42,6 +43,7 @@ class NoticeController extends Controller
         try {
             $limit = (int) $request->get('limit', 10);
             $orderBy = $request->get('order_by', []);
+            $orderBy = is_string($orderBy) ? OrderByHelper::treat($orderBy) : $orderBy;
 
             $result = $this->service->findByAuthor($author, $limit, $orderBy);
             $response = $this->successResponse($result, Response::HTTP_PARTIAL_CONTENT);
