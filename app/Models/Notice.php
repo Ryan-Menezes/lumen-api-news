@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Notice extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, Sluggable;
 
     protected $table = 'notices';
 
@@ -35,6 +36,16 @@ class Notice extends Model
     protected $casts = [
         'published_at' => 'datetime',
     ];
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => ['title', 'subtitle'],
+                'onUpdate' => false,
+            ],
+        ];
+    }
 
     public function author(): BelongsTo
     {

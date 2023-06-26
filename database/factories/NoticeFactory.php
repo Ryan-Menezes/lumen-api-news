@@ -23,12 +23,13 @@ class NoticeFactory extends Factory
     public function definition()
     {
         $title = $this->faker->sentence();
+        $subtitle = $this->faker->sentence();
 
         return [
             'author_id' => rand(1, 10),
             'title' => $title,
-            'subtitle' => $this->faker->sentence(),
-            'slug' => Str::slug($title),
+            'subtitle' => $subtitle,
+            // 'slug' => Str::slug($title . '-' . $subtitle),
             'description' => $this->faker->sentence(),
             'active' => $this->faker->boolean(),
             'published_at' => $this->faker->dateTime(),

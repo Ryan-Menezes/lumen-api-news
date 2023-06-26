@@ -6,6 +6,7 @@ use DateTimeImmutable;
 use App\Models\Author;
 use App\Models\Notice;
 use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 use Laravel\Lumen\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
@@ -112,6 +113,21 @@ class NoticeControllerTest extends TestCase
         $this->assertResponseStatus(Response::HTTP_CREATED);
         $this->seeJsonContains($model);
         $this->seeInDatabase('notices', $model);
+    }
+
+    public function testShouldGenerateASlugOnCreationIfItIsNotPassed()
+    {
+        $model = Notice::factory()->make()->toArray();
+        unset($model['slug']);
+
+        $this->post($this->uri, $model);
+
+        $this->assertResponseStatus(Response::HTTP_CREATED);
+        $this->seeJsonContains($model);
+        $this->seeInDatabase('notices', [
+            ...$model,
+            'slug' => Str::slug($model['title'] . '-' . $model['subtitle']),
+        ]);
     }
 
     public function testShouldSendReceiveAErrorIfPayloadIsIncomplete()

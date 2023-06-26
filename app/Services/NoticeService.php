@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Repositories\NoticeRepositoryInterface;
+use Illuminate\Support\Str;
 
 class NoticeService extends BaseService
 {
@@ -12,6 +13,17 @@ class NoticeService extends BaseService
     {
         parent::__construct($repository);
     }
+
+    /*
+    public function create(array $data): array
+    {
+        if (!isset($data['slug'])) {
+            $data['slug'] = Str::slug($data['title'] . '-' . $data['subtitle']);
+        }
+
+        return parent::create($data);
+    }
+    */
 
     public function findBySlug(string $slug): array
     {
