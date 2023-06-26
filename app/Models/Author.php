@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Hash;
 
 class Author extends Model
 {
@@ -43,7 +42,7 @@ class Author extends Model
     public function setPasswordAttribute($value)
     {
         if (!empty($value) && !is_null($value)) {
-            $this->attributes['password'] = Hash::make($value);
+            $this->attributes['password'] = encrypt($value);
         }
     }
 }

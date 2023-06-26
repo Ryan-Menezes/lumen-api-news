@@ -26,7 +26,7 @@ class AuthorFactory extends Factory
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail,
-            'password' => Hash::make('123'),
+            'password' => encrypt('123'),
             'gender' => 'M',
             'active' => $this->faker->boolean(),
         ];

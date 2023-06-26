@@ -92,7 +92,10 @@ class AuthorControllerTest extends TestCase
             'first_name' => 'John',
         ];
 
-        $this->put("{$this->uri}/{$model->id}", $data);
+        $this->put("{$this->uri}/{$model->id}", [
+            ...$data,
+            'password' => '123',
+        ]);
 
         $this->assertResponseOk();
         $this->seeJsonContains(['updated' => true]);

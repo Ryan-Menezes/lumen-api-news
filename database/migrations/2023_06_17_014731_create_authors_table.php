@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('first_name', 45);
             $table->string('last_name', 60);
             $table->string('email', 100);
-            $table->string('password', 191);
+            $table->text('password');
             $table->enum('gender', ['F', 'M']);
             $table->boolean('active')->default(true);
             $table->timestamps();
