@@ -2,7 +2,7 @@
 
 namespace Tests\Features\App\Http\Controllers;
 
-use DateTime;
+use DateTimeImmutable;
 use App\Models\Author;
 use Illuminate\Http\Response;
 use Laravel\Lumen\Testing\DatabaseMigrations;
@@ -112,7 +112,7 @@ class AuthorControllerTest extends TestCase
         $this->seeJsonContains(['deleted' => true]);
         $this->seeInDatabase('authors', [
             'id' => $model->id,
-            'deleted_at' => new DateTime('now'),
+            'deleted_at' => new DateTimeImmutable('now'),
         ]);
     }
 }

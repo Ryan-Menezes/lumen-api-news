@@ -39,10 +39,12 @@ class Author extends Model
         return $this->hasMany(Notice::class);
     }
 
+    /*
     public function setPasswordAttribute($value)
     {
         if (!empty($value) && !is_null($value)) {
             $this->attributes['password'] = encrypt($value);
         }
     }
+    */
 }

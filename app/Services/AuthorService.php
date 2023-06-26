@@ -13,7 +13,6 @@ class AuthorService extends BaseService
         parent::__construct($repository);
     }
 
-    /*
     public function create(array $data): array
     {
         if (isset($data['password'])) {
@@ -40,5 +39,4 @@ class AuthorService extends BaseService
 
         return parent::updateBy($param, $value, $data);
     }
-    */
 }

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('notice_images', function (Blueprint $table) {
             $table->id();
             $table->foreignId('notice_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->text('source');
+            $table->longText('source');
             $table->string('description', 191);
             $table->boolean('active')->default(true);
             $table->timestamps();

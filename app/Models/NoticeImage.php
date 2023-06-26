@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\ImageBase64Helper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -30,4 +31,13 @@ class NoticeImage extends Model
     {
         return $this->belongsTo(Notice::class);
     }
+
+    /*
+    public function setSourceAttribute($value)
+    {
+        if (!empty($value) && !is_null($value)) {
+            $this->attributes['source'] = ImageBase64Helper::generate($value);
+        }
+    }
+    */
 }

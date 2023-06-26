@@ -2,7 +2,8 @@
 
 namespace Tests\Features\App\Http\Controllers;
 
-use DateTime;
+use App\Helpers\ImageBase64Helper;
+use DateTimeImmutable;
 use App\Models\Author;
 use App\Models\Notice;
 use App\Models\NoticeImage;
@@ -89,10 +90,9 @@ class NoticeImageControllerTest extends TestCase
     {
         $model = NoticeImage::factory()->make()->toArray();
 
-        $this->post($this->uri, [
-            ...$model,
-            'password' => '123',
-        ]);
+        $this->post($this->uri, $model);
+
+        $model['source'] = ImageBase64Helper::generate($model['source']);
 
         $this->assertResponseStatus(Response::HTTP_CREATED);
         $this->seeJsonContains($model);
@@ -111,18 +111,21 @@ class NoticeImageControllerTest extends TestCase
     public function testShouldUpdateANoticeImageById()
     {
         $model = NoticeImage::factory()->create([
-            'source' => 'http://site.com/fake.jpg',
+            'source' => 'https://via.placeholder.com/640x480.png/00bbaa?text=ab',
         ]);
         $data = [
             ...$model->toArray(),
-            'source' => 'http://site.com/update.jpg'
+            'source' => 'https://via.placeholder.com/640x480.png/00bbaa?text=abcd'
         ];
 
         $this->put("{$this->uri}/{$model->id}", $data);
 
         $this->assertResponseOk();
         $this->seeJsonContains(['updated' => true]);
-        $this->seeInDatabase('notice_images', $data);
+        $this->seeInDatabase('notice_images', [
+            'id' => $data['id'],
+            'source' => ImageBase64Helper::generate($data['source']),
+        ]);
     }
 
     public function testShouldDeleteANoticeImageById()
@@ -135,7 +138,7 @@ class NoticeImageControllerTest extends TestCase
         $this->seeJsonContains(['deleted' => true]);
         $this->seeInDatabase('notice_images', [
             'id' => $model->id,
-            'deleted_at' => new DateTime('now'),
+            'deleted_at' => new DateTimeImmutable('now'),
         ]);
     }
 
@@ -152,7 +155,7 @@ class NoticeImageControllerTest extends TestCase
         $this->seeJsonContains(['deleted' => true]);
         $this->seeInDatabase('notice_images', [
             'notice_id' => $notice_id,
-            'deleted_at' => new DateTime('now'),
+            'deleted_at' => new DateTimeImmutable('now'),
         ]);
     }
 }

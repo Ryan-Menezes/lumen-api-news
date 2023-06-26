@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Helpers\ImageBase64Helper;
 use App\Models\NoticeImage;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,6 +14,10 @@ class NoticeImageSeeder extends Seeder
      */
     public function run(): void
     {
-        NoticeImage::factory(10)->create();
+        $model = NoticeImage::factory()->make();
+
+        NoticeImage::factory(10)->create([
+            'source' => ImageBase64Helper::generate($model->source),
+        ]);
     }
 }

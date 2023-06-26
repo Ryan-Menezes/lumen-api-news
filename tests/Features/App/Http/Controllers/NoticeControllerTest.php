@@ -2,7 +2,7 @@
 
 namespace Tests\Features\App\Http\Controllers;
 
-use DateTime;
+use DateTimeImmutable;
 use App\Models\Author;
 use App\Models\Notice;
 use Illuminate\Http\Response;
@@ -107,10 +107,7 @@ class NoticeControllerTest extends TestCase
     {
         $model = Notice::factory()->make()->toArray();
 
-        $this->post($this->uri, [
-            ...$model,
-            'password' => '123',
-        ]);
+        $this->post($this->uri, $model);
 
         $this->assertResponseStatus(Response::HTTP_CREATED);
         $this->seeJsonContains($model);
@@ -166,7 +163,7 @@ class NoticeControllerTest extends TestCase
         $this->seeJsonContains(['deleted' => true]);
         $this->seeInDatabase('notices', [
             'id' => $model->id,
-            'deleted_at' => new DateTime('now'),
+            'deleted_at' => new DateTimeImmutable('now'),
         ]);
     }
 
@@ -181,7 +178,7 @@ class NoticeControllerTest extends TestCase
         $this->seeInDatabase('notices', [
             'id' => $model->id,
             'slug' => $model->slug,
-            'deleted_at' => new DateTime('now'),
+            'deleted_at' => new DateTimeImmutable('now'),
         ]);
     }
 
@@ -198,7 +195,7 @@ class NoticeControllerTest extends TestCase
         $this->seeJsonContains(['deleted' => true]);
         $this->seeInDatabase('notices', [
             'author_id' => $author_id,
-            'deleted_at' => new DateTime('now'),
+            'deleted_at' => new DateTimeImmutable('now'),
         ]);
     }
 }
