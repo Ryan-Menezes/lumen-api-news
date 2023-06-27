@@ -29,8 +29,7 @@ class Notice extends Model
         'author_id' => 'required|numeric|exists:authors,id',
         'title' => 'required|min:20|max:100',
         'subtitle' => 'required|min:20|max:155',
-        'slug' => 'required',
-        'description' => 'required|min:100',
+        'description' => 'required|max:100',
     ];
 
     protected $casts = [

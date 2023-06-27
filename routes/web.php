@@ -2,6 +2,11 @@
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
+use App\Http\Middleware\ValidateDataMiddleware;
+use App\Models\Author;
+use App\Models\Notice;
+use App\Models\NoticeImage;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -18,7 +23,7 @@ $router->get('/', function () use ($router) {
 });
 
 $router->group(['prefix' => 'api/v1', 'namespace' => 'V1'], function () use ($router) {
-    $router->group(['prefix' => '/authors'], function () use ($router) {
+    $router->group(['prefix' => '/authors', 'as' => Author::class], function () use ($router) {
         $router->get('/', [
             'uses' => 'AuthorController@findAll',
         ]);
@@ -29,14 +34,17 @@ $router->group(['prefix' => 'api/v1', 'namespace' => 'V1'], function () use ($ro
 
         $router->post('/', [
             'uses' => 'AuthorController@create',
+            'middleware' => 'validator',
         ]);
 
         $router->put('/{id}', [
             'uses' => 'AuthorController@update',
+            'middleware' => 'validator',
         ]);
 
         $router->patch('/{id}', [
             'uses' => 'AuthorController@update',
+            'middleware' => 'validator',
         ]);
 
         $router->delete('/{id}', [
@@ -44,7 +52,7 @@ $router->group(['prefix' => 'api/v1', 'namespace' => 'V1'], function () use ($ro
         ]);
     });
 
-    $router->group(['prefix' => '/notices'], function () use ($router) {
+    $router->group(['prefix' => '/notices', 'as' => Notice::class], function () use ($router) {
         $router->get('/', [
             'uses' => 'NoticeController@findAll',
         ]);
@@ -63,22 +71,27 @@ $router->group(['prefix' => 'api/v1', 'namespace' => 'V1'], function () use ($ro
 
         $router->post('/', [
             'uses' => 'NoticeController@create',
+            'middleware' => 'validator',
         ]);
 
         $router->put('/{id}', [
             'uses' => 'NoticeController@update',
+            'middleware' => 'validator',
         ]);
 
         $router->patch('/{id}', [
             'uses' => 'NoticeController@update',
+            'middleware' => 'validator',
         ]);
 
         $router->put('/slug/{slug}', [
             'uses' => 'NoticeController@updateBySlug',
+            'middleware' => 'validator',
         ]);
 
         $router->patch('/slug/{slug}', [
             'uses' => 'NoticeController@updateBySlug',
+            'middleware' => 'validator',
         ]);
 
         $router->delete('/{id}', [
@@ -94,7 +107,7 @@ $router->group(['prefix' => 'api/v1', 'namespace' => 'V1'], function () use ($ro
         ]);
     });
 
-    $router->group(['prefix' => '/notices-images'], function () use ($router) {
+    $router->group(['prefix' => '/notices-images', 'as' => NoticeImage::class], function () use ($router) {
         $router->get('/', [
             'uses' => 'NoticeImageController@findAll',
         ]);
@@ -109,14 +122,17 @@ $router->group(['prefix' => 'api/v1', 'namespace' => 'V1'], function () use ($ro
 
         $router->post('/', [
             'uses' => 'NoticeImageController@create',
+            'middleware' => 'validator',
         ]);
 
         $router->put('/{id}', [
             'uses' => 'NoticeImageController@update',
+            'middleware' => 'validator',
         ]);
 
         $router->patch('/{id}', [
             'uses' => 'NoticeImageController@update',
+            'middleware' => 'validator',
         ]);
 
         $router->delete('/{id}', [

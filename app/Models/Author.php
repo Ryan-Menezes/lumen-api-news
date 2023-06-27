@@ -27,8 +27,8 @@ class Author extends Model
     ];
 
     public array $rules = [
-        'first_name' => 'required|min2|max:45|alpha',
-        'last_name' => 'required|min2|max:60|alpha',
+        'first_name' => 'required|min:2|max:45|alpha',
+        'last_name' => 'required|min:2|max:60|alpha',
         'email' => 'required|email|max:100|email:rfc,dns',
         'password' => 'required|between:6,12',
         'gender' => 'required|alpha|max:1',

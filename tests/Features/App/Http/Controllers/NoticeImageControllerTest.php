@@ -101,11 +101,25 @@ class NoticeImageControllerTest extends TestCase
 
     public function testShouldSendReceiveAErrorIfPayloadIsIncomplete()
     {
-        $model = ['first_name' => 'John'];
-
-        $this->post($this->uri, $model);
+        $this->post($this->uri, []);
 
         $this->assertResponseStatus(Response::HTTP_BAD_REQUEST);
+        $this->seeJsonContains([
+            'status_code' => Response::HTTP_BAD_REQUEST,
+            'error' => true,
+            'error_message' => 'Invalid data',
+            'error_description' => [
+                'notice_id' => [
+                    'The notice id field is required.',
+                ],
+                'source' => [
+                    'The source field is required.',
+                ],
+                'description' => [
+                    'The description field is required.',
+                ],
+            ],
+        ]);
     }
 
     public function testShouldUpdateANoticeImageById()

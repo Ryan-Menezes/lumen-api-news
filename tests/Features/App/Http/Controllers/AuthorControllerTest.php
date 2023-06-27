@@ -63,11 +63,13 @@ class AuthorControllerTest extends TestCase
 
     public function testShouldCreateAnAuthor()
     {
-        $model = Author::factory()->make()->toArray();
+        $model = Author::factory()->make([
+            'email' => 'test@gmail.com',
+        ])->toArray();
 
         $this->post($this->uri, [
             ...$model,
-            'password' => '123',
+            'password' => '123456',
         ]);
 
         $this->assertResponseStatus(Response::HTTP_CREATED);
@@ -77,16 +79,39 @@ class AuthorControllerTest extends TestCase
 
     public function testShouldSendReceiveAErrorIfPayloadIsIncomplete()
     {
-        $model = ['first_name' => 'John'];
-
-        $this->post($this->uri, $model);
+        $this->post($this->uri, []);
 
         $this->assertResponseStatus(Response::HTTP_BAD_REQUEST);
+        $this->seeJsonContains([
+            'status_code' => Response::HTTP_BAD_REQUEST,
+            'error' => true,
+            'error_message' => 'Invalid data',
+            'error_description' => [
+                'first_name' => [
+                    'The first name field is required.',
+                ],
+                'last_name' => [
+                    'The last name field is required.',
+                ],
+                'email' => [
+                    'The email field is required.',
+                ],
+                'password' => [
+                    'The password field is required.',
+                ],
+                'gender' => [
+                    'The gender field is required.',
+                ],
+            ],
+        ]);
     }
 
     public function testShouldUpdateAnAuthorById()
     {
-        $model = Author::factory()->create(['first_name' => 'Alex']);
+        $model = Author::factory()->create([
+            'first_name' => 'Alex',
+            'email' => 'test@gmail.com',
+        ]);
         $data = [
             ...$model->toArray(),
             'first_name' => 'John',
@@ -94,7 +119,7 @@ class AuthorControllerTest extends TestCase
 
         $this->put("{$this->uri}/{$model->id}", [
             ...$data,
-            'password' => '123',
+            'password' => '123456',
         ]);
 
         $this->assertResponseOk();

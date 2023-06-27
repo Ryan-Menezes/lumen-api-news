@@ -132,19 +132,36 @@ class NoticeControllerTest extends TestCase
 
     public function testShouldSendReceiveAErrorIfPayloadIsIncomplete()
     {
-        $model = ['first_name' => 'John'];
-
-        $this->post($this->uri, $model);
+        $this->post($this->uri, []);
 
         $this->assertResponseStatus(Response::HTTP_BAD_REQUEST);
+        $this->seeJsonContains([
+            'status_code' => Response::HTTP_BAD_REQUEST,
+            'error' => true,
+            'error_message' => 'Invalid data',
+            'error_description' => [
+                'author_id' => [
+                    'The author id field is required.',
+                ],
+                'title' => [
+                    'The title field is required.',
+                ],
+                'subtitle' => [
+                    'The subtitle field is required.',
+                ],
+                'description' => [
+                    'The description field is required.',
+                ],
+            ],
+        ]);
     }
 
     public function testShouldUpdateANoticeById()
     {
-        $model = Notice::factory()->create(['title' => 'Title']);
+        $model = Notice::factory()->create(['title' => 'Title With 20 Characters']);
         $data = [
             ...$model->toArray(),
-            'title' => 'New Title',
+            'title' => 'New Title With 20 Characters',
         ];
 
         $this->put("{$this->uri}/{$model->id}", $data);
@@ -156,10 +173,10 @@ class NoticeControllerTest extends TestCase
 
     public function testShouldUpdateANoticeBySlug()
     {
-        $model = Notice::factory()->create(['title' => 'Title']);
+        $model = Notice::factory()->create(['title' => 'Title With 20 Characters']);
         $data = [
             ...$model->toArray(),
-            'title' => 'New Title',
+            'title' => 'New Title With 20 Characters',
         ];
 
         $this->put("{$this->uri}/slug/{$model->slug}", $data);
