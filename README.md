@@ -1,26 +1,17 @@
-# Lumen PHP Framework
-
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://img.shields.io/packagist/dt/laravel/lumen-framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://img.shields.io/packagist/v/laravel/lumen-framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://img.shields.io/packagist/l/laravel/lumen)](https://packagist.org/packages/laravel/lumen-framework)
-
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
-
-> **Note:** In the years since releasing Lumen, PHP has made a variety of wonderful performance improvements. For this reason, along with the availability of [Laravel Octane](https://laravel.com/docs/octane), we no longer recommend that you begin new projects with Lumen. Instead, we recommend always beginning new projects with [Laravel](https://laravel.com).
-
-## Official Documentation
-
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
-
-## Contributing
-
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Lumen API News
+A simple API created with lumen microfrework to create news
+## Settings
+Have [Composer](https://getcomposer.org/) installed on your machine and through your terminal enter the project directory and run the command "composer update":
+```sh
+cd "project directory"
+composer update
+```
+After this initial configuration, go to the root of the project and look for the file ".env.example" and rename it to ".env", in the same file change the system constants according to your needs.
+<br><br>
+Finally access the root directory of the project through your terminal and run the command "php artisan migrate --seed":
+```sh
+cd "project directory"
+php artisan migrate --seed
+```
+## This project was developed with the help of an online course
+Course link: https://www.youtube.com/watch?v=5DuKETQLHRs&list=PLTZ2g-iFpCUuNWZ7wtDoxbKpSAChDyS0o&index=27
